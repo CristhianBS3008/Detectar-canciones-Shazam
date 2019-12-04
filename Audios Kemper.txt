@@ -1,0 +1,96 @@
+_Un shazam
+_Van a tener dos oportunidades por canción
+_6 canciones en wap pasará el profe
+_Nosotros tenemos que codificar las canciones y almacenarlas
+_El programa deberá procesar la señal del archivo escogido y deberá indicar por pantalla el nombre de la canción
+correspondiente y si no la encuentra, debe mostrar "canción no identificada"
+_Usar descomposición y reconstrucción subbanda, implica almacenar la información normalizada de energía ed cada
+subbanda resultante
+_A la música debemos codificarla por bloques, debemos diseñar el árbol de descomposiciónsubanada
+_Debes calcular la energía a cada banda, la energía = suma de las muestras al cuadrado
+_esa energía de cada subbanda la van a comparar con la energía de mayor valor de esa descomposición
+la van a dividir sobre ella y multiplicar por 100, entonces se va almacenar el procentaje de energía de cada subbada
+al final guardamos los porcentajes de energía
+
+0. La señal de audio lo dividimos en bloques, luego por cada bloque hacemos arbol de descomposición subbanda
+*deben tener las mismas subbandas cada bloque de la canción
+1. Van a sacar la energía de cada subbanda, luego sacan la subbanda con mayor energía Por ejem´plo: E2 es la mayor
+entonces (foto), de esa manera se saca el porcentaje de energía de cada subbanda respecto con la mayor.
+2. Guardamos los porcentajes de energía y hacemos lo mismo para el sgte bloque
+
+meta -->> matriz de energía (cada fila es un bloque de la canción) sea de menor tamaño pero que mantenga la 
+eficiencia de la detección de la canción
+*cada bloque tendrá una resolución --> num de muestras por bloque
+
+3.Cuando ingresemos la canción a reconocer, se hace lo mismo, se separa por bloques, se saca las subbandas,
+las energías y se obtiene su matriz de energía. Con esta nueva matriz de energía se compara con las matrices de 
+energía de toda las canciones y el que tenga menor error, es a la canción que pertenezca
+**encontrar el error más pequeño cuando se compara fila con fila
+**establecer un umbral de error, pq si no pasa el umbral entonces la canción no corresponde a ningunga del
+pack de canciones
+**el rpofesor va observar el tamaño de la matriz, el tamaño de la matriz depende mucho de la nota de la experiencia
+
+
+VALOR AGREGADO -->> leer la canción por micrófono
+
+
+0.1125    4.5677    2.9408    3.8843    2.1691    2.6557    0.8170    0.7392    0.5093    0.1216
+0.0401    0.4087    0.7811    1.0804    0.3287    0.1557    0.0552    0.0258    0.0333    0.0076
+0.4108    8.9282    2.7280    0.7822    0.7291    2.5515    0.6172    0.2788    0.0903    0.0467
+0.2571    7.4325    5.7201    6.0411    5.4131    4.4468    2.3708    1.3466    0.4281    0.0714
+1.1204    4.6119    4.2650    5.5623    3.9222    3.4998    0.8401    0.4064    0.3424    0.0124
+0.0221    1.6298    1.1648    0.5313    0.5238    0.2292    0.2427    0.1198    0.0487    0.0102
+
+2.4632  100.0000   64.3811   85.0372   47.4876   58.1397   17.8872   16.1828   11.1497    2.6627
+3.7091   37.8289   72.2965  100.0000   30.4205   14.4072    5.1110    2.3920    3.0834    0.7077
+4.6008  100.0000   30.5548    8.7607    8.1659   28.5777    6.9125    3.1231    1.0110    0.5234
+3.4595  100.0000   76.9611   81.2788   72.8295   59.8295   31.8972   18.1173    5.7599    0.9611
+20.1418   82.9122   76.6758  100.0000   70.5131   62.9194   15.1033    7.3060    6.1561    0.2231
+1.3563  100.0000   71.4736   32.6016   32.1429   14.0626   14.8943    7.3523    2.9856    0.6261           --->>VALORES PARA CANCIONES EN WAV
+
+-->>VALORES PARA MICROFONO
+0.0028    0.1760    0.6278    1.5783   13.2390   71.4053  100.0000   81.6960   10.8122    0.0005
+0.0779    0.0157    0.8836    0.9999    7.4582   60.4391  100.0000   71.8524    5.0472    0.0005
+0.0011    0.0096    0.1589    0.3631    9.8786   58.6802  100.0000   51.0253    7.1683    0.0004
+0.0018    0.0435    0.2329    1.3636   14.2516   70.6780  100.0000   50.4682    7.7073    0.0004
+0.0015    0.0039    0.2039    1.2769   13.7858   63.1436  100.0000   38.0651    7.2712    0.0004
+0.0027    0.0092    0.1366    1.5698   13.1437   70.5705  100.0000   96.3581   10.5800    0.0006
+
+0.0038    0.0654    2.2346    2.7849   47.4577   79.9124  100.0000   47.5071   12.6662    0.0009
+0.0038    0.0579    0.1424    1.3052   39.4580   69.6923  100.0000   25.9459    6.1105    0.0007
+0.0029    0.0601    0.2043    0.7938   11.8270   40.7516  100.0000   27.7481    3.4924    0.0005
+0.0015    0.3298    0.2820    0.9515   15.7430   39.7979  100.0000   26.3666    5.3704    0.0004
+0.1036    0.7716    1.2537    0.6782   11.0353   58.1882  100.0000   27.4477    4.1087    0.0005
+0.0025    0.0397    0.2009    3.4519   16.2799   56.1176  100.0000   39.7431    6.4671    0.0005
+
+0.0071    0.0040    0.0315    0.1385   13.3904  100.0000   29.3979   22.1761    0.1367    0.0003
+0.0007    0.0073    0.0380    0.1397   12.9085  100.0000   25.9209   21.5036    0.1373    0.0003
+0.0025    0.4037    0.5071    1.0144   10.7784  100.0000   62.6106   24.7281    0.4230    0.0004
+0.0026    0.0192    0.0421    0.3504   11.5392  100.0000   67.1329   31.0251    0.3809    0.0016
+0.0012    0.0082    0.4317    0.2879   10.6425  100.0000   51.2263   23.3494    0.3679    0.0004
+0.0031    0.0076    0.1168    0.5920   10.8975   88.3959   67.7491  100.0000    1.1714    0.0005
+
+
+0.0001    0.0008    0.0227    1.1744   19.9432  100.0000   84.0787   46.5457    3.6686    0.0004
+0.0008    0.0045    0.0751    1.1400   16.4357  100.0000   81.9249   83.3376    5.4743    0.0005
+0.0005    0.0013    0.0359    0.1739    8.8098   67.7647  100.0000   45.6762    2.4535    0.0004
+0.0006    0.0065    0.0350    0.1685   10.1483   86.4390  100.0000   48.9933    2.9512    0.0005
+0.0007    0.0086    0.1200    0.1583   13.0337   52.2717  100.0000   38.2695    2.6308    0.0004
+0.0037    0.4049    3.1767    1.8138   28.7575  100.0000   60.2645   69.1689    6.4630    0.0005
+
+0.0021    0.1585    2.7697    1.0626   51.4715   92.2932   87.8807  100.0000    8.2200    0.0065
+0.0028    2.2343    0.6046    0.6549   45.3341   89.4275   95.6541  100.0000    9.3230    0.0007
+0.0101    0.6627   10.3412    2.1229   47.3128  100.0000   91.2555   44.6253    3.5083    0.0008
+0.0002    0.0027    0.0343    0.7403   29.1189   77.8735  100.0000   50.0341    7.3636    0.0006
+0.0034    0.0138    0.3577    0.3912   32.0803   78.1627  100.0000   53.3044    6.2791    0.0007
+0.0038    0.7313    1.3355    1.3273   38.6442  100.0000   55.2802   67.8263   13.4441    0.0014
+
+0.0223    0.1301    0.3952    1.5194   12.3192   36.9569  100.0000   31.7328    4.3771    0.0004
+0.0009    0.0086    0.1430    0.8194   11.5365   40.5659  100.0000   44.9833    3.9054    0.0004
+0.0124    0.0365    0.2137    0.1870    9.7638   28.8480  100.0000   17.7441    0.7926    0.0003
+0.0014    0.0766    0.1937    0.2524   10.5483   36.9052  100.0000   17.7990    0.8468    0.0003
+0.3272    1.1773    8.2808    0.8097    9.8654   32.2633  100.0000   19.1402    1.0300    0.0003
+0.0223    0.0780    0.2347    0.9812   11.0181   34.1897  100.0000   36.4676    2.6250    0.0004
+
+
+
